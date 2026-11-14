@@ -349,7 +349,7 @@ B.Tech – Computer Science and Engineering
 Specialization: Artificial Intelligence and Machine Learning  
 VIT Chennai
 
-GitHub: https://github.com/YOUR_USERNAME
+GitHub: https://github.com/SixStringedSoul
 
 ---
 
