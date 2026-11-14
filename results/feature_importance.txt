@@ -1,0 +1,45 @@
+RANDOM FOREST FEATURE IMPORTANCE
+==================================================
+
+gyro_y_mean               0.077463
+acc_y_mean                0.077155
+acc_y_min                 0.059150
+gyro_y_min                0.052151
+gyro_x_mean               0.034322
+acc_x_mean                0.032686
+acc_y_max                 0.028274
+acc_mag_mean              0.026952
+gyro_x_max                0.026319
+gyro_y_max                0.025049
+gyro_mag_mean             0.024635
+gyro_mag_std              0.022488
+gyro_z_mean               0.022439
+gyro_z_std                0.022053
+acc_z_mean                0.021704
+acc_z_std                 0.020557
+gyro_mag_max              0.020467
+gyro_y_std                0.020245
+acc_y_std                 0.020128
+acc_x_max                 0.019924
+gyro_mag_min              0.019379
+gyro_z_max                0.018676
+gyro_x_min                0.018326
+acc_mag_min               0.017833
+acc_mag_max               0.017733
+acc_z_max                 0.017607
+acc_mag_std               0.017356
+gyro_z_min                0.017206
+gyro_x_std                0.016890
+jerk_mean                 0.016862
+acc_x_min                 0.016539
+acc_x_std                 0.016451
+gyro_z_range              0.016425
+acc_z_min                 0.016117
+gyro_x_range              0.015292
+gyro_mag_range            0.013634
+acc_x_range               0.013312
+gyro_y_range              0.013000
+jerk_max                  0.012793
+acc_z_range               0.012629
+acc_mag_range             0.011282
+acc_y_range               0.010500

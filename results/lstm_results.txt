@@ -1,0 +1,24 @@
+GUARDIAN - BIDIRECTIONAL LSTM RESULTS
+============================================================
+
+Model: Bidirectional LSTM
+Dataset: SisFall
+Input: 200 samples x 6 channels
+Threshold: 0.50
+Threshold 0.50 is the initial/default test evaluation.
+Threshold tuning must be performed on validation data only.
+
+Best epoch: 3
+Best validation F1: 69.51%
+
+Test Accuracy: 81.58%
+Test Precision: 72.69%
+Test Recall: 60.05%
+Test F1: 65.76%
+False Alarm Rate: 9.43%
+
+Confusion Matrix:
+TN = 14126
+FP = 1470
+FN = 2603
+TP = 3912

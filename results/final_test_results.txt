@@ -1,0 +1,24 @@
+GUARDIAN - FINAL TEST EVALUATION
+============================================================
+
+Model: Improved Bidirectional GRU
+Dataset: SisFall
+Evaluation split: TEST
+Probability threshold: 0.60
+Threshold selected using validation set only.
+
+Test samples: 22111
+Normal samples: 15596
+Fall samples: 6515
+
+Accuracy: 82.99%
+Fall Precision: 76.35%
+Fall Recall: 61.24%
+Fall F1-score: 67.97%
+False Alarm Rate: 7.93%
+
+Confusion Matrix:
+TN = 14360
+FP = 1236
+FN = 2525
+TP = 3990

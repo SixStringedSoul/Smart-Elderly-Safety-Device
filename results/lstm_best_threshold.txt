@@ -1,0 +1,19 @@
+GUARDIAN - LSTM VALIDATION THRESHOLD TUNING
+============================================================
+
+Model: Bidirectional LSTM
+Split: VALIDATION ONLY
+
+Best threshold: 0.50
+Accuracy: 83.06%
+Precision: 76.02%
+Recall: 64.03%
+F1: 69.51%
+False Alarm Rate: 8.73%
+TN: 13755
+FP: 1315
+FN: 2341
+TP: 4168
+
+Threshold selected using validation only.
+Do not tune using the test set.

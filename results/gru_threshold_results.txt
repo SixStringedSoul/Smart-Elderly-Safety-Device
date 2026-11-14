@@ -1,0 +1,141 @@
+GRU THRESHOLD TUNING RESULTS
+============================================================
+
+ALL THRESHOLDS
+------------------------------------------------------------
+Threshold: 0.10
+Precision: 0.3306
+Recall: 0.9899
+F1: 0.4956
+False Alarm Rate: 0.8658
+TN: 2023, FP: 13047, FN: 66, TP: 6443
+
+Threshold: 0.15
+Precision: 0.3438
+Recall: 0.9822
+F1: 0.5093
+False Alarm Rate: 0.8098
+TN: 2867, FP: 12203, FN: 116, TP: 6393
+
+Threshold: 0.20
+Precision: 0.3561
+Recall: 0.9455
+F1: 0.5173
+False Alarm Rate: 0.7384
+TN: 3942, FP: 11128, FN: 355, TP: 6154
+
+Threshold: 0.25
+Precision: 0.3836
+Recall: 0.9080
+F1: 0.5393
+False Alarm Rate: 0.6302
+TN: 5573, FP: 9497, FN: 599, TP: 5910
+
+Threshold: 0.30
+Precision: 0.4108
+Recall: 0.8587
+F1: 0.5557
+False Alarm Rate: 0.5320
+TN: 7053, FP: 8017, FN: 920, TP: 5589
+
+Threshold: 0.35
+Precision: 0.4418
+Recall: 0.8069
+F1: 0.5710
+False Alarm Rate: 0.4403
+TN: 8435, FP: 6635, FN: 1257, TP: 5252
+
+Threshold: 0.40
+Precision: 0.5894
+Recall: 0.7078
+F1: 0.6432
+False Alarm Rate: 0.2129
+TN: 11861, FP: 3209, FN: 1902, TP: 4607
+
+Threshold: 0.45
+Precision: 0.7224
+Recall: 0.6686
+F1: 0.6945
+False Alarm Rate: 0.1109
+TN: 13398, FP: 1672, FN: 2157, TP: 4352
+
+Threshold: 0.50
+Precision: 0.7421
+Recall: 0.6513
+F1: 0.6937
+False Alarm Rate: 0.0977
+TN: 13597, FP: 1473, FN: 2270, TP: 4239
+
+Threshold: 0.55
+Precision: 0.7492
+Recall: 0.6442
+F1: 0.6927
+False Alarm Rate: 0.0932
+TN: 13666, FP: 1404, FN: 2316, TP: 4193
+
+Threshold: 0.60
+Precision: 0.7517
+Recall: 0.6273
+F1: 0.6839
+False Alarm Rate: 0.0895
+TN: 13721, FP: 1349, FN: 2426, TP: 4083
+
+Threshold: 0.65
+Precision: 0.7612
+Recall: 0.6191
+F1: 0.6829
+False Alarm Rate: 0.0839
+TN: 13806, FP: 1264, FN: 2479, TP: 4030
+
+Threshold: 0.70
+Precision: 0.7754
+Recall: 0.6142
+F1: 0.6855
+False Alarm Rate: 0.0768
+TN: 13912, FP: 1158, FN: 2511, TP: 3998
+
+Threshold: 0.75
+Precision: 0.7793
+Recall: 0.6029
+F1: 0.6798
+False Alarm Rate: 0.0737
+TN: 13959, FP: 1111, FN: 2585, TP: 3924
+
+Threshold: 0.80
+Precision: 0.7777
+Recall: 0.5675
+F1: 0.6562
+False Alarm Rate: 0.0701
+TN: 14014, FP: 1056, FN: 2815, TP: 3694
+
+Threshold: 0.85
+Precision: 0.7913
+Recall: 0.5091
+F1: 0.6196
+False Alarm Rate: 0.0580
+TN: 14196, FP: 874, FN: 3195, TP: 3314
+
+Threshold: 0.90
+Precision: 0.8464
+Recall: 0.3521
+F1: 0.4973
+False Alarm Rate: 0.0276
+TN: 14654, FP: 416, FN: 4217, TP: 2292
+
+============================================================
+BEST THRESHOLD BY F1
+============================================================
+Threshold: 0.45
+Precision: 0.7224
+Recall: 0.6686
+F1: 0.6945
+False Alarm Rate: 0.1109
+
+============================================================
+BEST THRESHOLD WITH RECALL >= 70%
+============================================================
+Threshold: 0.40
+Precision: 0.5894
+Recall: 0.7078
+F1: 0.6432
+False Alarm Rate: 0.2129

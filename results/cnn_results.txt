@@ -1,0 +1,34 @@
+1D CNN FALL DETECTION RESULTS
+==================================================
+
+PyTorch version: 2.11.0+cu128
+Device: cuda
+GPU: NVIDIA GeForce RTX 3060 Laptop GPU
+
+MODEL ARCHITECTURE
+Input: 6 channels x 200 time steps
+Conv1D: 6 -> 32
+Conv1D: 32 -> 64
+Conv1D: 64 -> 128
+Dense: 3200 -> 128 -> 1
+Activation: ReLU
+Optimizer: Adam
+Learning rate: 0.001
+Batch size: 256
+Epochs: 30
+
+BEST VALIDATION MODEL
+Best epoch: 5
+Best validation F1: 0.6330
+
+FINAL TEST RESULTS
+Accuracy:  0.7174
+Precision: 0.5131
+Recall:    0.8011
+F1 Score:  0.6256
+
+CONFUSION MATRIX
+True Negatives:  10644
+False Positives: 4952
+False Negatives: 1296
+True Positives:  5219

@@ -1,0 +1,16 @@
+IMPROVED GRU FALL DETECTION RESULTS
+======================================================================
+
+Best Epoch: 2
+Best Validation F1: 0.6860
+
+TEST RESULTS
+----------------------------------------------------------------------
+Accuracy: 0.8198
+Fall Precision: 0.6929
+Fall Recall: 0.6976
+Fall F1: 0.6953
+
+Confusion Matrix
+[[13582  2014]
+ [ 1970  4545]]

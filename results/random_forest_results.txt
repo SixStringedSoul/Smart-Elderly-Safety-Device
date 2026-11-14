@@ -1,0 +1,25 @@
+RANDOM FOREST FALL DETECTION RESULTS
+==================================================
+
+MODEL PARAMETERS
+Number of trees: 200
+Random state: 42
+Class weighting: balanced
+
+VALIDATION RESULTS
+Accuracy:  0.8165
+Precision: 0.6878
+Recall:    0.7170
+F1 Score:  0.7021
+
+TEST RESULTS
+Accuracy:  0.7711
+Precision: 0.5930
+Recall:    0.7111
+F1 Score:  0.6467
+
+CONFUSION MATRIX
+True Negatives:  12416
+False Positives: 3180
+False Negatives: 1882
+True Positives:  4633

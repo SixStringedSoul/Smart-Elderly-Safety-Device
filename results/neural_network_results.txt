@@ -1,0 +1,31 @@
+NEURAL NETWORK FALL DETECTION RESULTS
+==================================================
+
+PyTorch version: 2.11.0+cu128
+Device: cuda
+GPU: NVIDIA GeForce RTX 3060 Laptop GPU
+
+MODEL ARCHITECTURE
+42 -> 128 -> 64 -> 32 -> 1
+Activation: ReLU
+Dropout: 0.30
+Optimizer: Adam
+Learning rate: 0.001
+Batch size: 256
+Epochs: 30
+
+BEST VALIDATION RESULTS
+Best epoch: 2
+Best validation F1: 0.7340
+
+FINAL TEST RESULTS
+Accuracy:  0.8090
+Precision: 0.6693
+Recall:    0.6953
+F1 Score:  0.6821
+
+CONFUSION MATRIX
+True Negatives:  13358
+False Positives: 2238
+False Negatives: 1985
+True Positives:  4530

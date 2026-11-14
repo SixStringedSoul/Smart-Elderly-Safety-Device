@@ -1,0 +1,16 @@
+CNN-GRU FALL DETECTION RESULTS
+======================================================================
+
+Best Epoch: 8
+Best Validation F1: 0.6418
+
+TEST RESULTS
+----------------------------------------------------------------------
+Accuracy: 0.6961
+Fall Precision: 0.4908
+Fall Recall: 0.8335
+Fall F1: 0.6178
+
+Confusion Matrix
+[[9962 5634]
+ [1085 5430]]

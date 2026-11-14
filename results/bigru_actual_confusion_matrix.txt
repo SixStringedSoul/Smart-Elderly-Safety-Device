@@ -1,0 +1,17 @@
+GUARDIAN - ACTUAL BiGRU CONFUSION MATRIX
+==================================================
+
+Threshold: 0.6
+
+Accuracy: 82.99%
+Precision: 76.35%
+Recall: 61.24%
+F1 Score: 67.97%
+False Alarm Rate: 7.93%
+
+Confusion Matrix
+----------------
+TN = 14360
+FP = 1236
+FN = 2525
+TP = 3990

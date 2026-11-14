@@ -1,0 +1,19 @@
+Guardian Temporal Confirmation - Validation Results
+============================================================
+
+Base model: Improved BiGRU
+Base probability threshold: 0.6
+Validation samples: 21579
+Metadata file: validation_metadata.csv
+
+Best validation rule by F1:
+Rule: 1_consecutive
+Accuracy: 82.98%
+Precision: 76.31%
+Recall: 63.20%
+F1: 69.14%
+False alarm rate: 8.47%
+TP: 4114
+TN: 13793
+FP: 1277
+FN: 2395
