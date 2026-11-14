@@ -1,0 +1,36 @@
+
+# Python cache
+__pycache__/
+*.py[cod]
+
+# Virtual environments
+venv/
+.venv/
+env/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Secrets
+.env
+.env.*
+!.env.example
+
+# IDE files
+.vscode/
+.idea/
+
+# Operating system
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Large datasets - do not upload raw data
+datasets/SisFall_dataset/Sisfall/
+datasets/har70/har70plus/
+
+# Temporary files
+temp/
+tmp/
