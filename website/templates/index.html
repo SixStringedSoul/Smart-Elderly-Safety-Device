@@ -1,0 +1,859 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <link
+  rel="stylesheet"
+  href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+/>
+
+<script
+  src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js">
+</script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#080d17">
+  <title>Guardian — Elderly Safety Intelligence</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
+</head>
+<body>
+<div class="ambient ambient-a"></div><div class="ambient ambient-b"></div>
+<div class="app-shell">
+  <aside class="sidebar" id="sidebar">
+    <a class="brand" href="#overview" aria-label="Guardian home">
+      <span class="brand-symbol"><span></span><span></span><span></span></span>
+      <span class="brand-copy"><b>guardian<span>.</span></b><small>ELDERLY SAFETY INTELLIGENCE</small></span>
+    </a>
+    <div class="nav-caption">PLATFORM</div>
+    <nav class="navigation">
+      <a class="nav-link active" href="#overview" data-section="overview"><span class="nav-icon">◫</span><span>Overview</span><kbd>01</kbd></a>
+      <a class="nav-link" href="#monitoring" data-section="monitoring"><span class="nav-icon">⌁</span><span>AI monitoring</span><kbd>02</kbd></a>
+      <a class="nav-link" href="#health" data-section="health"><span class="nav-icon">♡</span><span>Health vitals</span><kbd>03</kbd></a>
+      <a class="nav-link" href="#alerts" data-section="alerts"><span class="nav-icon">◉</span><span>Alert history</span><kbd>04</kbd></a>
+      <a class="nav-link" href="#device" data-section="device"><span class="nav-icon">⬡</span><span>Device & sensors</span><kbd>05</kbd></a>
+    </nav>
+    <div class="sidebar-card">
+      <div class="sidebar-orb"><span></span></div>
+      <p>GUARDIAN CARE</p><strong>Safety, made visible.</strong>
+      <small>Fall detection · Health signals · Emergency response</small>
+    </div>
+    <div class="sidebar-bottom">
+      <button class="sidebar-profile-button" id="sidebarProfileButton" type="button" aria-label="Open Guardian project information">
+        <span class="profile-mark">G</span><span class="profile-copy"><strong>Guardian prototype</strong><small>Capstone project · v1.0</small></span>
+      </button>
+      <button class="more-dots" id="sidebarMoreButton" type="button" aria-label="More project options" aria-expanded="false" title="More options">•••</button>
+      <div class="sidebar-more-menu" id="sidebarMoreMenu" hidden>
+        <button type="button" data-sidebar-action="status">System status</button>
+        <button type="button" data-sidebar-action="export">Export event log</button>
+        <button type="button" data-sidebar-action="about">About Guardian</button>
+      </div>
+    </div>
+  </aside>
+
+  <main class="main-area" id="overview">
+    <header class="topbar">
+      <section class="guardian-profile-card">
+
+  <div class="guardian-person">
+    <div class="guardian-avatar">RK</div>
+
+    <div class="guardian-person-info">
+      <span class="eyebrow">PROTECTED PERSON</span>
+      <h2>Rajesh Kumar</h2>
+      <p>72 years · Guardian wearable connected</p>
+
+      <div class="guardian-status">
+        <span class="guardian-online-dot"></span>
+        <span id="personStatus">SAFE / MONITORED</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="guardian-location">
+    <span>📍 CURRENT LOCATION</span>
+    <strong id="profileLocation">Waiting for GPS...</strong>
+    <small id="profileCoordinates">--, --</small>
+  </div>
+
+  <div class="guardian-contact">
+    <span>EMERGENCY CONTACT</span>
+    <strong>Family / Caregiver</strong>
+    <small>+91 XXXXX XXXXX</small>
+  </div>
+
+  <button class="sos-button" id="sosButton" type="button">
+    <span class="sos-icon">!</span>
+    <span>
+      <strong>EMERGENCY SOS</strong>
+      <small>Press for immediate assistance</small>
+    </span>
+  </button>
+
+</section>
+      <button class="mobile-menu" id="mobileMenu" aria-label="Toggle navigation">☰</button>
+      <div class="breadcrumb"><span>WORKSPACE</span><i>/</i><b>Overview</b></div>
+      <div class="top-actions">
+        <span class="environment-pill"><i></i><span>SIMULATION PREVIEW</span></span>
+        <button class="icon-button" id="refreshBtn" title="Refresh status" aria-label="Refresh status">↻</button>
+        <button class="top-avatar clickable-avatar" id="profileButton" type="button" aria-label="Open profile menu" aria-expanded="false" title="Open profile menu">G</button>
+      <div class="profile-menu" id="profileMenu" hidden>
+        <div class="profile-menu-head"><span class="profile-menu-avatar">G</span><span><b>Guardian prototype</b><small>Capstone project · v1.0</small></span></div>
+        <div class="profile-menu-status"><i></i> Preview mode · no live device</div>
+        <button type="button" class="profile-menu-action" data-profile-action="status">View system status <span>→</span></button>
+        <button type="button" class="profile-menu-action" data-profile-action="about">About Guardian <span>→</span></button>
+      </div>
+      </div>
+    </header>
+
+    <section class="hero">
+      <div class="hero-copy">
+        <div class="eyebrow"><span class="eyebrow-line"></span> SMART EMERGENCY ASSISTANCE</div>
+        <h1>Care that moves<br>with <em>them.</em></h1>
+        <p>A unified view of movement intelligence, health signals and emergency readiness — designed around the people who matter most.</p>
+        <div class="hero-actions">
+          <a class="primary-button" href="#monitoring">Explore AI monitoring <span>↗</span></a>
+          <a class="quiet-button" href="#device">View device setup <span>→</span></a>
+        </div>
+        <div class="hero-footnote"><span class="pulse-dot"></span> <span id="heroStatus">Prototype interface · awaiting live device data</span></div>
+      </div>
+      <div class="hero-visual">
+        <div class="visual-label label-top"><span class="tiny-dot cyan-dot"></span> WEARABLE CONCEPT <small>01 / DEVICE</small></div>
+        <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><div class="orbit orbit-three"></div>
+        <div id="device3d" class="device-canvas" aria-label="Interactive 3D concept of the Guardian wearable device"></div>
+        <div class="floating-chip chip-motion"><span class="chip-icon">⌁</span><span><small>MOTION SENSOR</small><b>6-axis IMU</b></span><i></i></div>
+        <div class="floating-chip chip-ai"><span class="chip-icon">✳</span><span><small>AI ENGINE</small><b>BiGRU ready</b></span><i></i></div>
+        <div class="visual-label label-bottom"><span>ROTATE · DRAG</span><span>3D MODEL / CONCEPT</span></div>
+      </div>
+    </section>
+
+    <section class="status-strip">
+      <div class="status-intro"><span class="status-ring"><i></i></span><div><strong>System overview</strong><small>Current platform readiness</small></div></div>
+      <div class="strip-item"><span class="strip-key">DEVICE</span><b id="deviceStatus">Offline</b><small id="deviceDetail">No ESP32 stream</small></div>
+      <div class="strip-item"><span class="strip-key">AI INFERENCE</span><b class="violet-text" id="modelStatus">Model prepared</b><small>Live pipeline pending</small></div>
+      <div class="strip-item"><span class="strip-key">ALERT CHANNEL</span><b id="alertStatus">Not connected</b><small>GSM integration pending</small></div>
+      <div class="strip-live"><span class="live-dot"></span> PREVIEW</div>
+    </section>
+
+    <section class="section-block" id="monitoring">
+      <div class="section-title-row"><div><div class="eyebrow">01 / MOVEMENT INTELLIGENCE</div><h2>Monitor at a glance<span>.</span></h2><p>Fall detection and sensor activity, ready for live inference integration.</p></div><span class="section-index">GUARDIAN / AI</span></div>
+      <div class="metric-grid">
+        <article class="metric-card metric-primary"><div class="metric-heading"><span>Fall detection state</span><span class="metric-icon">⌁</span></div><div class="metric-main" id="fallState">Awaiting data</div><div class="metric-sub"><span class="state-indicator"></span><span id="fallSub">No live sensor window</span></div><div class="card-spark"><svg viewBox="0 0 260 36" preserveAspectRatio="none"><path d="M0 29 C18 29 19 22 33 24 S49 34 64 19 S84 25 96 14 S118 24 130 19 S150 8 164 17 S187 28 200 13 S227 19 260 4" /></svg></div></article>
+        <article class="metric-card"><div class="metric-heading"><span>Fall probability</span><span class="metric-icon violet-icon">◌</span></div><div class="metric-main"><span id="fallProbability">—</span><small> / 1.00</small></div><div class="probability-track"><div id="probabilityFill"></div><i style="left:60%"></i></div><div class="metric-foot"><span>Decision threshold</span><b>0.60</b></div></article>
+        <article class="metric-card"><div class="metric-heading"><span>Window length</span><span class="metric-icon blue-icon">◷</span></div><div class="metric-main">1.0<small> sec</small></div><div class="metric-sub">200 time steps · 6 channels</div><div class="metric-bottom-note">Accelerometer XYZ + gyroscope XYZ</div></article>
+        <article class="metric-card"><div class="metric-heading"><span>Model status</span><span class="metric-icon green-icon">✳</span></div><div class="metric-main model-ready">BiGRU</div><div class="metric-sub"><span class="mini-status"></span>Trained offline</div><div class="metric-bottom-note">Backend inference integration pending</div></article>
+      </div>
+      <div class="analytics-grid">
+        <article class="panel signal-panel">
+          <div class="panel-heading"><div><h3>Motion signal explorer</h3><p>Illustrative signal until MPU6050 is connected</p></div><div class="select-wrap"><select id="signalMode" aria-label="Signal mode"><option value="combined">Combined view</option><option value="accel">Accelerometer</option><option value="gyro">Gyroscope</option></select></div></div>
+          <div class="chart-key"><span><i class="key-cyan"></i> Acceleration</span><span><i class="key-purple"></i> Angular velocity</span><span class="chart-preview-label">PREVIEW SIGNAL</span></div>
+          <div class="chart-holder"><canvas id="motionChart"></canvas></div>
+          <div class="chart-footer"><span><i class="tiny-dot cyan-dot"></i> 200 Hz target sampling</span><span>Window overlap: 50%</span><span>6 input channels</span></div>
+        </article>
+        <article class="panel inference-panel">
+          <div class="panel-heading"><div><h3>Inference console</h3><p>Model decision pipeline</p></div><span class="pill-neutral">BiGRU</span></div>
+          <div class="console-steps">
+            <div class="console-step complete"><span class="step-num">01</span><div><b>Input window</b><small>200 × 6 motion samples</small></div><span class="step-state">READY</span></div>
+            <div class="console-connector"></div>
+            <div class="console-step complete"><span class="step-num">02</span><div><b>Preprocessing</b><small>Training-matched normalization</small></div><span class="step-state">PLANNED</span></div>
+            <div class="console-connector"></div>
+            <div class="console-step waiting"><span class="step-num">03</span><div><b>BiGRU prediction</b><small>Saved checkpoint · backend hookup</small></div><span class="step-state">PENDING</span></div>
+            <div class="console-connector"></div>
+            <div class="console-step waiting"><span class="step-num">04</span><div><b>Alert decision</b><small>Threshold 0.60 · event log</small></div><span class="step-state">PENDING</span></div>
+          </div>
+          <div class="inference-note"><span>ⓘ</span><p>Predictions will appear here after the saved model and its exact preprocessing are connected to Flask.</p></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section-block" id="health">
+      <div class="section-title-row"><div><div class="eyebrow">02 / VITALS & WELLBEING</div><h2>Health signals<span>.</span></h2><p>Ready for MAX30102 heart-rate and SpO₂ telemetry.</p></div><span class="section-index">GUARDIAN / VITALS</span></div>
+      <div class="vitals-grid">
+        <article class="vital-card"><div class="vital-top"><span class="vital-icon heart">♡</span><span class="not-connected">NOT CONNECTED</span></div><div class="vital-label">Heart rate</div><div class="vital-value">— <small>BPM</small></div><div class="vital-chart"><svg viewBox="0 0 300 50" preserveAspectRatio="none"><path d="M0 27 L28 27 L38 27 L46 8 L54 42 L63 20 L75 27 L104 27 L114 27 L124 8 L132 42 L141 20 L153 27 L180 27 L190 27 L200 8 L208 42 L217 20 L229 27 L260 27 L270 27 L280 8 L288 42 L300 27"/></svg></div><p>Waiting for live MAX30102 readings</p></article>
+        <article class="vital-card"><div class="vital-top"><span class="vital-icon oxygen">◉</span><span class="not-connected">NOT CONNECTED</span></div><div class="vital-label">Blood oxygen</div><div class="vital-value">— <small>% SpO₂</small></div><div class="oxygen-gauge"><div class="gauge-track"></div><div class="gauge-center">—<small>SpO₂</small></div></div><p>Waiting for live MAX30102 readings</p></article>
+        <article class="vital-card"><div class="vital-top"><span class="vital-icon battery">ϟ</span><span class="not-connected">NOT CONNECTED</span></div><div class="vital-label">Device battery</div><div class="vital-value">— <small>%</small></div><div class="battery-visual"><div class="battery-shell"><div></div></div><span>Battery telemetry unavailable</span></div><p>Battery status will appear after hardware integration</p></article>
+      </div>
+      <div class="medical-note"><span>ⓘ</span><p>Guardian is a research prototype, not a certified medical device. Any future vital readings must be treated as informational and verified independently.</p></div>
+    </section>
+
+    <section class="section-block" id="alerts">
+      <div class="gps-map-card">
+    <div class="gps-map-header">
+        <div>
+            <span class="eyebrow">LIVE LOCATION</span>
+            <h3>Guardian GPS tracking</h3>
+            <p>Real-time location received from the Guardian device.</p>
+        </div>
+
+        <span id="gpsStatus" class="gps-status">
+            WAITING
+        </span>
+    </div>
+
+    <div id="guardianMap"></div>
+
+    <div class="gps-info">
+        <div>
+            <span>LATITUDE</span>
+            <strong id="gpsLatitude">—</strong>
+        </div>
+
+        <div>
+            <span>LONGITUDE</span>
+            <strong id="gpsLongitude">—</strong>
+        </div>
+
+        <div>
+            <span>ACCURACY</span>
+            <strong id="gpsAccuracy">—</strong>
+        </div>
+
+        <div>
+            <span>LAST UPDATE</span>
+            <strong id="gpsTime">—</strong>
+        </div>
+    </div>
+</div>
+      <div class="section-title-row"><div><div class="eyebrow">03 / RESPONSE & HISTORY</div><h2>Alert centre<span>.</span></h2><p>Review events and plan emergency escalation.</p></div><button class="outline-button" id="exportEvents">Export event log ↗</button></div>
+      <div class="alerts-layout">
+        <article class="panel event-panel"><div class="panel-heading"><div><h3>Recent events</h3><p>Live event history will appear here</p></div><span class="pill-neutral">0 EVENTS</span></div><div class="empty-events"><div class="empty-event-icon">✓</div><b>No events recorded</b><p>When real model inference is connected, fall predictions and system events will be listed here.</p></div><div class="event-list" id="eventList"></div></article>
+        <article class="panel response-panel"><div class="panel-heading"><div><h3>Emergency response</h3><p>Response modules readiness</p></div></div><div class="response-item"><span class="response-icon gps">⌖</span><div><b>GPS location</b><small>NEO-6M · UART integration pending</small></div><span class="response-tag">PENDING</span></div><div class="response-item"><span class="response-icon gsm">⌁</span><div><b>SMS / call alert</b><small>SIM800L · not connected</small></div><span class="response-tag">PENDING</span></div><div class="response-item"><span class="response-icon sos">!</span><div><b>Manual SOS button</b><small>ESP32 GPIO input pending</small></div><span class="response-tag">PENDING</span></div><div class="response-item"><span class="response-icon buzzer">♫</span><div><b>Local buzzer / LED</b><small>Device-side alert pending</small></div><span class="response-tag">PENDING</span></div><div class="response-disclaimer">Emergency dispatch is not active in this preview.</div></article>
+      </div>
+    </section>
+
+    <section class="section-block" id="device">
+      <div class="section-title-row"><div><div class="eyebrow">04 / HARDWARE READINESS</div><h2>Device & sensors<span>.</span></h2><p>Guardian's planned hardware modules and current integration state.</p></div><span class="section-index">GUARDIAN / DEVICE</span></div>
+      <div class="device-grid">
+        <article class="panel device-panel"><div class="device-panel-head"><div><span class="device-kicker">WEARABLE / CONCEPT RENDER</span><h3>Guardian safety node</h3></div><span class="pill-neutral">3D MODEL</span></div><div class="device-mini-visual"><div class="mini-orbit"></div><div id="device3dMini"></div></div><p class="device-description">Concept visualization for the wearable safety node. It is a website illustration, not a CAD-accurate model of the assembled hardware.</p><div class="device-meta"><span>PROCESSOR<strong>ESP32-S2</strong></span><span>MOTION<strong>MPU6050</strong></span><span>ML PIPELINE<strong>BiGRU</strong></span></div></article>
+        <article class="panel sensors-panel"><div class="panel-heading"><div><h3>Module checklist</h3><p>Integration status based on current project stage</p></div></div><div class="sensor-row"><span class="sensor-symbol motion">⌁</span><div><b>MPU6050 IMU</b><small>Motion and orientation · I²C</small></div><span class="sensor-state amber-state">Testing</span></div><div class="sensor-row"><span class="sensor-symbol pulse">♡</span><div><b>MAX30102</b><small>Heart rate and SpO₂ · I²C</small></div><span class="sensor-state grey-state">Pending</span></div><div class="sensor-row"><span class="sensor-symbol gps">⌖</span><div><b>NEO-6M GPS</b><small>Location coordinates · UART</small></div><span class="sensor-state grey-state">Pending</span></div><div class="sensor-row"><span class="sensor-symbol gsm">⌁</span><div><b>SIM800L GSM</b><small>Emergency SMS / calls · UART</small></div><span class="sensor-state grey-state">Pending</span></div><div class="sensor-row"><span class="sensor-symbol sos">!</span><div><b>SOS + buzzer + LED</b><small>Manual and local alerts</small></div><span class="sensor-state grey-state">Pending</span></div></article>
+      </div>
+    </section>
+
+    <footer class="footer"><div class="footer-brand"><span class="brand-symbol small-symbol"><span></span><span></span><span></span></span> GUARDIAN <i>·</i> SMART EMERGENCY ASSISTANCE FOR THE ELDERLY</div><div class="footer-right"><span class="footer-status-dot"></span> DEMO MODE <span>© 2026 GUARDIAN CAPSTONE</span></div></footer>
+  </main>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<div class="modal-backdrop" id="infoModal" hidden>
+  <section class="info-modal" role="dialog" aria-modal="true" aria-labelledby="infoModalTitle">
+    <button type="button" class="modal-close" id="closeInfoModal" aria-label="Close dialog">×</button>
+    <div class="modal-brand-mark">G</div>
+    <div class="eyebrow">GUARDIAN / PROJECT INFO</div>
+    <h2 id="infoModalTitle">Guardian prototype</h2>
+    <p id="infoModalText">Smart Emergency Assistance for the Elderly.</p>
+    <div class="modal-details"><span>Website</span><b>Interactive 3D dashboard</b><span>AI model</span><b>Improved BiGRU · integration pending</b><span>Hardware</span><b>ESP32-S2 · sensor integration pending</b><span>Mode</span><b>Preview — no live emergency dispatch</b></div>
+    <button type="button" class="primary-button modal-done" id="modalDone">Got it <span>✓</span></button>
+  </section>
+</div>
+<script>
+/* =========================================================
+   GUARDIAN BACKEND API CONNECTION
+   Flask backend: http://127.0.0.1:5000
+   ========================================================= */
+
+const GUARDIAN_API = "/api";
+
+/* ---------------------------------------------------------
+   Update dashboard from Flask backend
+   --------------------------------------------------------- */
+async function loadGuardianStatus() {
+    try {
+        const response = await fetch(`${GUARDIAN_API}/status`, {
+            method: "GET",
+            headers: {
+                "Accept": "application/json"
+            },
+            cache: "no-store"
+        });
+
+        if (!response.ok) {
+            throw new Error(`HTTP ${response.status}`);
+        }
+
+        const data = await response.json();
+
+        console.log("Guardian backend response:", data);
+
+        /*
+         * Your current backend may only return:
+         *
+         * {
+         *   "message": "Guardian backend is..."
+         * }
+         *
+         * So we safely handle both the current response
+         * and the future ML response.
+         */
+
+        updateDashboard(data);
+
+    } catch (error) {
+
+        console.error("Guardian API connection failed:", error);
+
+        const heroStatus = document.getElementById("heroStatus");
+
+        if (heroStatus) {
+            heroStatus.textContent =
+                "Backend unavailable · check Flask server";
+        }
+
+        const deviceStatus =
+            document.getElementById("deviceStatus");
+
+        if (deviceStatus) {
+            deviceStatus.textContent = "Offline";
+        }
+
+        const deviceDetail =
+            document.getElementById("deviceDetail");
+
+        if (deviceDetail) {
+            deviceDetail.textContent =
+                "Backend connection unavailable";
+        }
+
+        const modelStatus =
+            document.getElementById("modelStatus");
+
+        if (modelStatus) {
+            modelStatus.textContent =
+                "Backend unavailable";
+        }
+    }
+}
+
+
+/* ---------------------------------------------------------
+   Put backend data into the dashboard
+   --------------------------------------------------------- */
+function updateDashboard(data) {
+
+    console.log("Updating Guardian dashboard:", data);
+
+    /* =========================
+       DEVICE
+       ========================= */
+
+    const deviceStatus =
+        document.getElementById("deviceStatus");
+
+    const deviceDetail =
+        document.getElementById("deviceDetail");
+
+    if (deviceStatus) {
+
+        if (data.device_connected === true) {
+            deviceStatus.textContent = "Online";
+        }
+        else if (data.device_connected === false) {
+            deviceStatus.textContent = "Offline";
+        }
+        else {
+            deviceStatus.textContent =
+                data.device_status || "Online";
+        }
+    }
+
+    if (deviceDetail) {
+
+        deviceDetail.textContent =
+            data.device_detail ||
+            data.device_message ||
+            "Flask backend connected";
+    }
+
+
+    /* =========================
+       AI MODEL
+       ========================= */
+
+    const modelStatus =
+        document.getElementById("modelStatus");
+
+    if (modelStatus) {
+
+        modelStatus.textContent =
+            data.model_status ||
+            data.model ||
+            "BiGRU ready";
+    }
+
+
+    /* =========================
+       FALL PREDICTION
+       ========================= */
+
+    const fallState =
+        document.getElementById("fallState");
+
+    const fallSub =
+        document.getElementById("fallSub");
+
+    const fallProbability =
+        document.getElementById("fallProbability");
+
+    const probabilityFill =
+        document.getElementById("probabilityFill");
+
+
+    /*
+     * Expected future backend format:
+     *
+     * {
+     *     "prediction": "FALL",
+     *     "probability": 0.91
+     * }
+     */
+
+    const prediction =
+        data.prediction ||
+        data.predicted_class ||
+        data.fall_prediction;
+
+    const probability =
+        Number(
+            data.probability ??
+            data.fall_probability ??
+            data.confidence
+        );
+
+
+    if (prediction && fallState) {
+
+        fallState.textContent =
+            String(prediction).toUpperCase();
+
+        if (
+            String(prediction).toUpperCase() === "FALL"
+        ) {
+
+            if (fallSub) {
+                fallSub.textContent =
+                    "Potential fall detected";
+            }
+
+        } else {
+
+            if (fallSub) {
+                fallSub.textContent =
+                    "Normal movement detected";
+            }
+        }
+    }
+
+
+    if (
+        Number.isFinite(probability) &&
+        fallProbability
+    ) {
+
+        fallProbability.textContent =
+            probability.toFixed(3);
+
+        if (probabilityFill) {
+
+            const percentage =
+                Math.max(
+                    0,
+                    Math.min(100, probability * 100)
+                );
+
+            probabilityFill.style.width =
+                `${percentage}%`;
+        }
+    }
+
+
+    /* =========================
+       ALERT STATUS
+       ========================= */
+
+    const alertStatus =
+        document.getElementById("alertStatus");
+
+    if (alertStatus) {
+
+        alertStatus.textContent =
+            data.alert_status ||
+            "Preview mode";
+    }
+
+
+    /* =========================
+       HERO STATUS
+       ========================= */
+
+    const heroStatus =
+        document.getElementById("heroStatus");
+
+    if (heroStatus) {
+
+        heroStatus.textContent =
+            data.message ||
+            "Guardian backend connected · awaiting sensor data";
+    }
+}
+
+
+/* ---------------------------------------------------------
+   Refresh button
+   --------------------------------------------------------- */
+
+const refreshButton =
+    document.getElementById("refreshBtn");
+
+if (refreshButton) {
+
+    refreshButton.addEventListener(
+        "click",
+        async function () {
+
+            refreshButton.style.transform =
+                "rotate(360deg)";
+
+            await loadGuardianStatus();
+
+            setTimeout(() => {
+                refreshButton.style.transform =
+                    "rotate(0deg)";
+            }, 400);
+        }
+    );
+}
+
+
+/* ---------------------------------------------------------
+   Initial API call
+   --------------------------------------------------------- */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
+
+        loadGuardianStatus();
+
+        /*
+         * Refresh backend data every 3 seconds.
+         *
+         * Later this can become real-time ESP32
+         * sensor + ML prediction data.
+         */
+        setInterval(
+            loadGuardianStatus,
+            3000
+        );
+    }
+);
+</script>
+
+<script src="{{ url_for('static', filename='app.js') }}"></script>
+<script>
+/* =========================================================
+   GUARDIAN LIVE SENSOR SIMULATION
+   For presentation/demo when hardware is unavailable
+   ========================================================= */
+
+let guardianSimulation = {
+    latitude: 13.0827,
+    longitude: 80.2707,
+    heartRate: 72,
+    spo2: 98,
+    battery: 87,
+    fallDetected: false,
+    fallProbability: 0.08
+};
+
+
+/* ---------------------------------------------------------
+   SIMULATE SENSOR VALUES
+   --------------------------------------------------------- */
+
+function simulateSensors() {
+
+    // Heart rate
+    guardianSimulation.heartRate =
+        Math.floor(68 + Math.random() * 15);
+
+    // SpO2
+    guardianSimulation.spo2 =
+        Math.floor(96 + Math.random() * 3);
+
+    // Slowly decrease battery
+    guardianSimulation.battery =
+        Math.max(20, guardianSimulation.battery - 0.01);
+
+    // Small GPS movement
+    guardianSimulation.latitude +=
+        (Math.random() - 0.5) * 0.00015;
+
+    guardianSimulation.longitude +=
+        (Math.random() - 0.5) * 0.00015;
+
+    // Normal/fall simulation
+    guardianSimulation.fallDetected =
+        Math.random() < 0.08;
+
+    if (guardianSimulation.fallDetected) {
+        guardianSimulation.fallProbability =
+            0.75 + Math.random() * 0.20;
+    } else {
+        guardianSimulation.fallProbability =
+            0.05 + Math.random() * 0.25;
+    }
+
+    updateGuardianWebsite();
+}
+
+
+/* ---------------------------------------------------------
+   UPDATE WEBSITE
+   --------------------------------------------------------- */
+
+function updateGuardianWebsite() {
+
+    const hr = guardianSimulation.heartRate;
+    const spo2 = guardianSimulation.spo2;
+    const battery = Math.round(guardianSimulation.battery);
+    const probability = guardianSimulation.fallProbability;
+    const fall = guardianSimulation.fallDetected;
+
+    /* HEART RATE */
+
+    const heartElements =
+        document.querySelectorAll(".vital-value");
+
+    if (heartElements.length >= 1) {
+        heartElements[0].innerHTML =
+            `${hr} <small>BPM</small>`;
+    }
+
+
+    /* SPO2 */
+
+    if (heartElements.length >= 2) {
+        heartElements[1].innerHTML =
+            `${spo2} <small>% SpO₂</small>`;
+    }
+
+
+    /* BATTERY */
+
+    if (heartElements.length >= 3) {
+        heartElements[2].innerHTML =
+            `${battery} <small>%</small>`;
+    }
+
+
+    /* FALL STATE */
+
+    const fallState =
+        document.getElementById("fallState");
+
+    const fallSub =
+        document.getElementById("fallSub");
+
+    const fallProbability =
+        document.getElementById("fallProbability");
+
+    const probabilityFill =
+        document.getElementById("probabilityFill");
+
+    if (fallState) {
+
+        if (fall) {
+            fallState.textContent = "FALL DETECTED";
+
+            if (fallSub)
+                fallSub.textContent =
+                    "Emergency event detected";
+
+        } else {
+
+            fallState.textContent = "NORMAL";
+
+            if (fallSub)
+                fallSub.textContent =
+                    "Movement within safe range";
+        }
+    }
+
+
+    /* FALL PROBABILITY */
+
+    if (fallProbability) {
+        fallProbability.textContent =
+            probability.toFixed(2);
+    }
+
+    if (probabilityFill) {
+        probabilityFill.style.width =
+            `${probability * 100}%`;
+    }
+
+
+    /* DEVICE STATUS */
+
+    const deviceStatus =
+        document.getElementById("deviceStatus");
+
+    const deviceDetail =
+        document.getElementById("deviceDetail");
+
+    if (deviceStatus)
+        deviceStatus.textContent = "Online";
+
+    if (deviceDetail)
+        deviceDetail.textContent =
+            "Simulation stream active";
+
+
+    /* MODEL STATUS */
+
+    const modelStatus =
+        document.getElementById("modelStatus");
+
+    if (modelStatus)
+        modelStatus.textContent =
+            "BiGRU Active";
+
+
+    /* ALERT STATUS */
+
+    const alertStatus =
+        document.getElementById("alertStatus");
+
+    if (alertStatus) {
+
+        if (fall) {
+            alertStatus.textContent =
+                "ALERT TRIGGERED";
+        } else {
+            alertStatus.textContent =
+                "Standby";
+        }
+    }
+
+
+    /* HERO STATUS */
+
+    const heroStatus =
+        document.getElementById("heroStatus");
+
+    if (heroStatus) {
+
+        if (fall) {
+
+            heroStatus.textContent =
+                "⚠ FALL DETECTED · Emergency response initiated";
+
+        } else {
+
+            heroStatus.textContent =
+                "Live simulation · sensors operating normally";
+        }
+    }
+
+
+    /* SEND LOCATION TO FLASK */
+
+    sendLocationToBackend();
+}
+
+
+/* ---------------------------------------------------------
+   SEND GPS LOCATION TO FLASK
+   --------------------------------------------------------- */
+
+async function sendLocationToBackend() {
+
+    try {
+
+        const response = await fetch("/api/location", {
+
+            method: "POST",
+
+            headers: {
+                "Content-Type": "application/json"
+            },
+
+            body: JSON.stringify({
+
+                latitude:
+                    guardianSimulation.latitude,
+
+                longitude:
+                    guardianSimulation.longitude,
+
+                accuracy:
+                    Math.floor(5 + Math.random() * 5),
+
+                timestamp:
+                    new Date().toISOString()
+
+            })
+        });
+
+        const data = await response.json();
+
+        console.log(
+            "Guardian GPS:",
+            data
+        );
+
+    } catch (error) {
+
+        console.log(
+            "GPS backend unavailable:",
+            error
+        );
+    }
+}
+
+
+/* ---------------------------------------------------------
+   START SIMULATION
+   --------------------------------------------------------- */
+
+function startGuardianSimulation() {
+
+    console.log(
+        "===================================="
+    );
+
+    console.log(
+        "GUARDIAN SENSOR SIMULATION STARTED"
+    );
+
+    console.log(
+        "===================================="
+    );
+
+    // Initial update
+    simulateSensors();
+
+    // Update every 3 seconds
+    setInterval(
+        simulateSensors,
+        3000
+    );
+}
+
+
+/* ---------------------------------------------------------
+   START AFTER WEBSITE LOADS
+   --------------------------------------------------------- */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    startGuardianSimulation
+);
+
+</script>
+<script src="{{ url_for('static', filename='gps.js') }}"></script>
+<script src="{{ url_for('static', filename='gps-map.js') }}"></script>
+
+</body>
+</html>
