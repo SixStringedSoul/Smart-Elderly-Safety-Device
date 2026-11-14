@@ -1,0 +1,11 @@
+# GUARDIAN - Smart Elderly Safety Device
+# Initial dependencies identified from the project structure.
+# Verify against imports in all project scripts before publishing.
+
+numpy
+pandas
+scikit-learn
+torch
+matplotlib
+openpyxl
+Flask
